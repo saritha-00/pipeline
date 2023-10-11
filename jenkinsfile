@@ -20,7 +20,7 @@ pipeline
                 {
                     // Build the Docker image
                     sh 'docker build -t sarithaladella/helloworld .'
-                    sh 'docker build -t sarithaladella/nicejob .'
+                    sh 'docker build -t sarithaladella/nicejob dockerfile1'
                 }
             }
         }
