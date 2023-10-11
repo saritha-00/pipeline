@@ -19,8 +19,8 @@ pipeline
                 script 
                 {
                     // Build the Docker image
-                    sh 'docker build -t sarithaladella/index .'
-                    sh 'docker build -t sarithaladella/resume .'
+                    sh 'docker build -t sarithaladella/hello .'
+                    sh 'docker build -t sarithaladella/job .'
                 }
             }
         }
@@ -36,8 +36,8 @@ pipeline
                         sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
                         
                         // Push the Docker image to Docker Hub
-                        sh 'docker push sarithaladella/index'
-                        sh 'docker push sarithaladella/resume'
+                        sh 'docker push sarithaladella/hello'
+                        sh 'docker push sarithaladella/job'
             
                     }
                 }
@@ -49,8 +49,8 @@ pipeline
                 script {
                     sshagent(credentials: ['host-key']) {
                         sh '''
-                        ssh -o StrictHostKeyChecking=no ec2-user@18.234.96.192 "sudo docker pull sarithaladella/index && sudo docker run -d -p 3000:3000 sarithaladella/index"
-                        ssh -o StrictHostKeyChecking=no ec2-user@18.234.96.192 "sudo docker pull sarithaladella/resume && sudo docker run -d -p 5000:5000 sarithaladella/resume"
+                        ssh -o StrictHostKeyChecking=no ec2-user@18.234.96.192 "sudo docker pull sarithaladella/hello && sudo docker run -d -p 3000:3000 sarithaladella/hello"
+                        ssh -o StrictHostKeyChecking=no ec2-user@18.234.96.192 "sudo docker pull sarithaladella/job && sudo docker run -d -p 5000:5000 sarithaladella/job"
                         '''
                     }      
                 }   
